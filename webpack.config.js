@@ -107,7 +107,6 @@ let config = {
     ]
 };
 
-//todo postcss addons
 //todo svg sprite loader
 //todo split config
 //todo font loader
