@@ -4,11 +4,9 @@ module.exports = {
         'autoprefixer': {},
         'postcss-flexbugs-fixes' : {},
         'postcss-assets': {},
-        'postcss-at2x' : {
-            skipMissingRetina: true
-        },
+        'postcss-at2x' : {},
         'postcss-sprites': {
-            retina: true,
+            retina: false,
             spritePath: 'src/images/',
             spritesmith: { padding: 5 },
             filterBy: (image) => {
