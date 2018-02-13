@@ -65,12 +65,13 @@ let config = {
                     {
                         loader: 'html-loader',
                         options: { minimize: false }
-                    },
-                    {
-                        loader: 'posthtml-loader',
                     }
-
                 ]
+            },
+
+            {
+                test: /\.pug$/,
+                use: "pug-loader?pretty=true"
             },
 
 
@@ -90,14 +91,14 @@ let config = {
 
         new HtmlWebpackPlugin(
             {
-                template: 'templates/index.html',
+                template: 'templates/index.pug',
                 filename: './index.html'
             }
         ),
 
         new HtmlWebpackPlugin(
             {
-                template: 'templates/copy.html',
+                template: 'templates/copy.pug',
                 filename: './copy.html'
 
             }
