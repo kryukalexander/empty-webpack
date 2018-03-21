@@ -129,6 +129,5 @@ let config = {
 
 //todo svg sprite loader
 //todo split config
-//todo font loader
 
 module.exports = config;
