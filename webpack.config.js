@@ -3,6 +3,8 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 let config = {
     context: path.resolve(__dirname, 'src'),
@@ -40,16 +42,20 @@ let config = {
 
                         {
                             loader: 'css-loader',
-                            options: { sourceMap: true }
+                            options: { sourceMap: true, url: false }
                         },
 
                         {
                             loader: 'postcss-loader',
                             options: { sourceMap: true }
                         },
+                        
+                        {
+                          loader: 'resolve-url-loader'
+                        },
 
                         {
-                            loader: 'sass-loader',
+                            loader: 'sass-loader?sourceMap',
                             options: { sourceMap: true }
                         }
                     ],
@@ -77,12 +83,13 @@ let config = {
 
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                exclude: [ path.resolve('images', 'icons-svg'), path.resolve('images', 'images-sprite')],
+                exclude: [ path.resolve('images', 'icons-svg'), path.resolve('images', 'images-sprite'), path.resolve('fonts')],
                 use: [
                     'url-loader?limit=1500&name=[path][name].[ext]',
                     'img-loader'
                 ]
             }
+            
         ]
     },
 
@@ -92,7 +99,7 @@ let config = {
         new HtmlWebpackPlugin(
             {
                 template: 'templates/index.pug',
-                filename: './index.html'
+                filename: './index.html',
             }
         ),
 
@@ -104,7 +111,19 @@ let config = {
             }
         ),
 
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('css/style.css'),
+
+        new CopyWebpackPlugin([
+            {
+                from: './fonts',
+                to: './fonts'
+            },
+
+            {
+                from: './images/sprite.png',
+                to: './images/sprite.png'
+            },
+        ]),
     ]
 };
 
